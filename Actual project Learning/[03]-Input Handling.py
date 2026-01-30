@@ -1,3 +1,7 @@
+"""
+Taking user input to move the player
+"""
+
 import pygame as pg    
 
 WIDTH, HEIGHT = 800,600

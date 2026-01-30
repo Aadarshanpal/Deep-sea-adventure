@@ -1,3 +1,7 @@
+"""
+Making our player. He cant move yet though.
+"""
+
 import pygame as pg    
 
 WIDTH, HEIGHT = 800,600

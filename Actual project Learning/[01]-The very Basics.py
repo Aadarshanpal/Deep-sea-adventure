@@ -1,4 +1,8 @@
-import pygame as pg    #Just declaring that we will use pg. instead of pygame. to save time 
+"""
+The very basics from import to game loop
+"""
+
+import pygame as pg    #Just declaring that we will use pg. instead of pygame to save time 
 
 
 #Defining screen size

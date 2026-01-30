@@ -1,3 +1,11 @@
+"""
+IMP
+This is just for learning and doesnt relate to the project.
+But it is indeed conceptual so take a look to just understand.
+
+""" 
+
+
 import pygame as pg
 
 
@@ -44,7 +52,7 @@ class Player:
         self.gravity = 1300
         self.max_speed = 300
         self.friction = 2
-        self.jump_strength = 2000 #My boy is flyinggggggggg
+        self.jump_strength = 1000
 
     def handle_input(self,dt):
         

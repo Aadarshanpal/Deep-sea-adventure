@@ -1,3 +1,7 @@
+"""
+Making the player stay in bounds/ Stay in screen.
+"""
+
 import pygame as pg    
 
 WIDTH, HEIGHT = 800,600

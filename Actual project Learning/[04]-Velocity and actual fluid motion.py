@@ -1,3 +1,7 @@
+"""
+Actually making it realistic by implementing Physics 
+"""
+
 import pygame as pg    
 
 WIDTH, HEIGHT = 800,600
@@ -72,3 +76,8 @@ while running:
     draw(screen)
 
     pg.display.flip()
+
+"""
+Note: accel = pixels/sec², dt = time i.e sec hence, Velocity = Velocity[pixels/sec] + pixels/sec² * sec   [v = u + at] => Velocity = pixels/sec. Again, movement of player,
+X = X + Velocity * dt => X = Initial position + pixels/sec * sec => X = Initial position + pixels
+"""
