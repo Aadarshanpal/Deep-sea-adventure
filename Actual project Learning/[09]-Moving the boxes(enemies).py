@@ -1,6 +1,6 @@
 """
 In this one we add multiple boxes that can be collided with and they will move back to the right of the screen
-That is, return to a random position in their range
+That is, return to a random position in their range.
 """
 
 import pygame as pg
