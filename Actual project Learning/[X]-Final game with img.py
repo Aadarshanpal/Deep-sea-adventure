@@ -8,10 +8,10 @@ clock = pg.time.Clock()
 font = pg.font.SysFont("arial", 36)
 
 # -------- LOAD IMAGES --------
-player_img = pg.image.load("Project Codes/player.png").convert_alpha()
-enemy_img = pg.image.load("Project Codes/enemy.png").convert_alpha()
-treasure_img = pg.image.load("Project Codes/treasure.png").convert_alpha()
-background_img = pg.image.load("Project Codes/background5.jpeg").convert()
+player_img = pg.image.load("Project Codes/Images/player.png").convert_alpha()
+enemy_img = pg.image.load("Project Codes/Images/enemy.png").convert_alpha()
+treasure_img = pg.image.load("Project Codes/Images/treasure.png").convert_alpha()
+background_img = pg.image.load("Project Codes/Images/background5.jpeg").convert()
 
 player_img = pg.transform.scale(player_img,(100,100))
 enemy_img = pg.transform.scale(enemy_img,(100,100))
