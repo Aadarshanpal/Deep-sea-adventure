@@ -10,4 +10,4 @@ Group name: Lazy Compilers
   Pragya Dhakal
 
 Project Implementation Language: Python
-  Libraries used: Pygame
+  Libraries used: Pygame-ce
