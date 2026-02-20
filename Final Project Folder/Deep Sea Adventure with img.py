@@ -13,9 +13,9 @@ enemy_img = pg.image.load("Images/enemy.png").convert_alpha()
 treasure_img = pg.image.load("Images/treasure.png").convert_alpha()
 background_img = pg.image.load("Images/background5.jpeg").convert()
 
-player_img = pg.transform.scale(player_img,(100,100))
-enemy_img = pg.transform.scale(enemy_img,(100,100))
-treasure_img = pg.transform.scale(treasure_img,(50,50))
+player_img = pg.transform.scale(player_img,(120,120))
+enemy_img = pg.transform.scale(enemy_img,(120,120))
+treasure_img = pg.transform.scale(treasure_img,(70,70))
 background_img = pg.transform.scale(background_img, (WIDTH, HEIGHT))
 
 bg_x = 0
@@ -32,7 +32,7 @@ class Enemy:
         self.rect = pg.Rect(
             WIDTH + random.randint(0, 300),
             random.randint(self.y1, self.y2),
-            40, 40
+            70, 70
         )
         self.velocity = random.randint(200, 350)
 
@@ -55,7 +55,7 @@ class Treasure:
         self.rect = pg.Rect(
             WIDTH + random.randint(200, 600),
             random.randint(self.y1, self.y2),
-            30, 30
+            70, 70
         )
         self.velocity = random.randint(180, 320)
 
@@ -70,7 +70,7 @@ class Treasure:
 # ---------------- PLAYER ----------------
 class Player:
     def __init__(self):
-        self.rect = pg.Rect(WIDTH//2, HEIGHT//2, 40, 40)
+        self.rect = pg.Rect(WIDTH//2, HEIGHT//2, 70, 70)
         self.vel_x = 0
         self.vel_y = 0
 
@@ -136,7 +136,7 @@ class Player:
         surface.blit(player_img, self.rect)
 
 # ---------------- SETUP ----------------
-lanes = [(40,200),(200,360),(360,520),(520,680)]
+lanes = [(50, 250), (300, 500), (550, 750), (800, 1000)]
 
 enemies = [Enemy(y1,y2) for (y1,y2) in lanes]
 treasures = [Treasure(y1,y2) for (y1,y2) in lanes]

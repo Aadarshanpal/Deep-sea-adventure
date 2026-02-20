@@ -18,22 +18,18 @@ font = pg.font.SysFont("arial", 36)
 # ---------------- HELPER DRAWING FUNCTION ----------------
 def draw_filled_rect(surface, rect, color):
     """Draws a rectangle using Bresenham lines and safely fills it."""
-    # Check if the rect is even on the screen to prevent IndexError
     if not surface.get_rect().colliderect(rect):
         return
 
-    # 1. Draw the 4 boundary lines using Bresenham
     draw_bresenham(surface, rect.left, rect.top, rect.right, rect.top, color)
     draw_bresenham(surface, rect.left, rect.bottom, rect.right, rect.bottom, color)
     draw_bresenham(surface, rect.left, rect.top, rect.left, rect.bottom, color)
     draw_bresenham(surface, rect.right, rect.top, rect.right, rect.bottom, color)
     
-    # 2. Safety check: ensure center point is inside screen bounds
     if 0 <= rect.centerx < WIDTH and 0 <= rect.centery < HEIGHT:
         try:
             flood_fill(surface, rect.centerx, rect.centery, color)
         except RecursionError:
-            # If the area is too big, recursion might fail
             pass
 
 # ---------------- ENEMY ----------------
@@ -46,7 +42,6 @@ class Enemy:
         self.reset()
 
     def reset(self):
-        # Spawning off-screen; draw_filled_rect will now handle this safely
         self.rect = pg.Rect(
             WIDTH + random.randint(0, 300),
             random.randint(self.y1, self.y2),
@@ -94,9 +89,9 @@ class Player:
         self.rect = pg.Rect(WIDTH//2, HEIGHT//2, 30, 30)
         self.vel_x = 0
         self.vel_y = 0
-        self.max_speed = 400
-        self.accel = 1800
-        self.friction = 12
+        self.max_speed = 450
+        self.accel = 2200
+        self.friction = 8  # Adjusted for better feel
         self.lives = 3
         self.score = 0
         self.hit_cd = 0
@@ -109,18 +104,29 @@ class Player:
         if keys[pg.K_w] or keys[pg.K_UP]: ay = -1
         if keys[pg.K_s] or keys[pg.K_DOWN]: ay = 1
 
+        # Apply acceleration based on input
         self.vel_x += ax * self.accel * dt
         self.vel_y += ay * self.accel * dt
 
-        if ax == 0: self.vel_x -= self.vel_x * self.friction * dt
-        if ay == 0: self.vel_y -= self.vel_y * self.friction * dt
-
     def update(self, dt):
-        self.vel_x = max(-self.max_speed, min(self.vel_x, self.max_speed))
-        self.vel_y = max(-self.max_speed, min(self.vel_y, self.max_speed))
+        # Apply friction/drag continuously
+        self.vel_x *= (1 - self.friction * dt)
+        self.vel_y *= (1 - self.friction * dt)
+
+        # Clamp speed to max_speed
+        if abs(self.vel_x) > self.max_speed:
+            self.vel_x = (self.vel_x / abs(self.vel_x)) * self.max_speed
+        if abs(self.vel_y) > self.max_speed:
+            self.vel_y = (self.vel_y / abs(self.vel_y)) * self.max_speed
+
+        # Stop tiny movements to prevent drift jitter
+        if abs(self.vel_x) < 1: self.vel_x = 0
+        if abs(self.vel_y) < 1: self.vel_y = 0
+
         self.rect.x += self.vel_x * dt
         self.rect.y += self.vel_y * dt
         self.rect.clamp_ip(pg.Rect(0,0,WIDTH,HEIGHT))
+        
         if self.hit_cd > 0: self.hit_cd -= dt
 
     def enemy_collision(self, enemy):
